@@ -3,6 +3,7 @@
 
 import sys
 import traceback
+import logging
 from datetime import datetime
 
 from aiohttp import web
@@ -57,7 +58,7 @@ async def on_error(context: TurnContext, error: Exception):
 ADAPTER.on_turn_error = on_error
 
 # Create the Bot
-BOT = MyBot()
+BOT = MyBot(CONFIG)
 
 
 # Listen for incoming requests on /api/messages
@@ -85,6 +86,7 @@ APP.router.add_post("/api/messages", messages)
 
 if __name__ == "__main__":
     try:
+        logging.basicConfig(level=logging.INFO)
         web.run_app(APP, host="localhost", port=CONFIG.PORT)
     except Exception as error:
         raise error
