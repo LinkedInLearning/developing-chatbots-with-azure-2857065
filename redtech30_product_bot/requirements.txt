@@ -1,2 +1,4 @@
 botbuilder-core>=4.7.0
 aiohttp
+botbuilder-ai
+flask
