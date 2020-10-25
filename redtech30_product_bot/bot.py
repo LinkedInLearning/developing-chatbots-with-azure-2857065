@@ -1,6 +1,3 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
-
 from botbuilder.core import ActivityHandler, TurnContext
 from botbuilder.schema import ChannelAccount
 
@@ -11,21 +8,49 @@ from botbuilder.ai.luis import LuisApplication, LuisRecognizer
 from botbuilder.core import ActivityHandler, MessageFactory, TurnContext
 from botbuilder.schema import ChannelAccount
 
-def get_top_intent(recognizer_result):
-    sorted_intents = sorted(
-                    recognizer_result.intents,
-                    key=recognizer_result.intents.get,
-                    reverse=True,
-                )
-    print (sorted_intents)
-    intent = sorted_intents[:1][0] if recognizer_result.intents else None
-    return intent
-
-def get_entities(recognizer_result, entity_name=None):
-    print (recognizer_result.entities.get("$instance", {}))
+from data_fetcher import ProductDataFetcher
+from utils.utils import IntentHandler
 
 
-class MyBot(ActivityHandler):
+class ProductIntentHandler(IntentHandler):
+    def __init__(self):
+        super().__init__()
+        self.data_fetcher = ProductDataFetcher()
+        self.product_name = None
+
+    def get_product_price(self):
+        try:
+            product_name = self.get_entities().get("product_name")[0]
+        except KeyError:
+            return "Cannot Recognize a product"
+        price = self.data_fetcher.get_price(product_name)
+        return f"The price of product {product_name} is {price}"
+    
+    def get_product_info(self):
+        try:
+            product_name = self.get_entities()["product_name"][0]
+        except KeyError:
+            return "Cannot Recognize a product"
+        product_info = self.data_fetcher.get_product_info(product_name)
+        return product_info
+
+    def get_product_by_category(self):
+        print (self.get_entities())
+        try:
+            category = self.get_entities()["product_categories"][0]
+        except KeyError:
+            return "Cannot Recognize a product"
+        products = self.data_fetcher.list_products(category)["Product"]
+        if products.empty:
+            return f"No products in {category} category"
+        products = ",".join(products)
+        return f"Here are some {category} products we provide {products}"
+
+
+
+
+
+class ProductBot(ActivityHandler):
     # See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
 
     def __init__(self, config: Config):
@@ -45,19 +70,16 @@ class MyBot(ActivityHandler):
                 host=config.QNA_ENDPOINT_HOST,
             )
         )
-
-
+        
     async def on_message_activity(self, turn_context: TurnContext):
-        response = await self._recognizer.recognize(turn_context)
-        intent = get_top_intent(response)
-        print (intent)
-
-        get_entities(response)
         response = await self.qna_maker.get_answers(turn_context)
         if response and len(response) > 0:
             await turn_context.send_activity(MessageFactory.text(response[0].answer))
         else:
-            await turn_context.send_activity("No QnA Maker answers were found.")
+            intent_handler = ProductIntentHandler()
+            response = await self._recognizer.recognize(turn_context)
+            return_text = intent_handler.handle(response)
+            await turn_context.send_activity(return_text)
 
     async def on_members_added_activity(
         self,
