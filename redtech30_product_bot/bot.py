@@ -1,6 +1,3 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
-
 from botbuilder.core import ActivityHandler, TurnContext
 from botbuilder.schema import ChannelAccount
 
@@ -11,7 +8,9 @@ from botbuilder.core import ActivityHandler, MessageFactory, TurnContext
 from botbuilder.schema import ChannelAccount
 
 
-class MyBot(ActivityHandler):
+
+
+class ProductBot(ActivityHandler):
     # See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
 
     def __init__(self, config: Config):
@@ -22,15 +21,17 @@ class MyBot(ActivityHandler):
                 host=config.QNA_ENDPOINT_HOST,
             )
         )
-
-
+        
     async def on_message_activity(self, turn_context: TurnContext):
         response = await self.qna_maker.get_answers(turn_context)
         print (response)
         if response and len(response) > 0:
             await turn_context.send_activity(MessageFactory.text(response[0].answer))
         else:
-            await turn_context.send_activity("No QnA Maker answers were found.")
+            intent_handler = ProductIntentHandler()
+            response = await self._recognizer.recognize(turn_context)
+            return_text = intent_handler.handle(response)
+            await turn_context.send_activity(return_text)
 
     async def on_members_added_activity(
         self,
