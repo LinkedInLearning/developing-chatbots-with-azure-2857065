@@ -2,3 +2,5 @@
 node_modules
 .tmp
 npm-debug.log
+.vscode
+__pycache__
