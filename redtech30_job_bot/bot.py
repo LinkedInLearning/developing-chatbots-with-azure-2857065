@@ -25,7 +25,7 @@ class JobBot(ActivityHandler):
         luis_application = LuisApplication(
             config.LUIS_APP_ID,
             config.LUIS_API_KEY,
-            "https://" + config.LUIS_API_HOST_NAME,
+            config.LUIS_API_HOST_NAME,
         )
 
         self._recognizer = LuisRecognizer(luis_application)
@@ -43,7 +43,7 @@ class JobBot(ActivityHandler):
         if response and len(response) > 0:
             await turn_context.send_activity(MessageFactory.text(response[0].answer))
         else:
-            intent_handler = ProductIntentHandler()
+            intent_handler = JobIntentHandler()
             response = await self._recognizer.recognize(turn_context)
             return_text = intent_handler.handle(response)
             await turn_context.send_activity(return_text)
