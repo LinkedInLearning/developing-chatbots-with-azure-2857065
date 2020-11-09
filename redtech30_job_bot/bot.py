@@ -11,11 +11,29 @@ from botbuilder.schema import ChannelAccount
 from data_fetcher import JobDataFetcher
 from utils.utils import IntentHandler
 
+import logging
+import numpy as np
 
 class JobIntentHandler(IntentHandler):
     def __init__(self):
         super().__init__()
         self.data_fetcher = JobDataFetcher()
+
+    def get_job(self):
+        filter_options = self.get_entities()
+        print ("Hello... ", filter_options)
+        data = self.data_fetcher.get_job(**filter_options)
+        if data.empty:
+            return "No jobs found"
+        else:
+            print (data)
+            # Job description,Technology,Years of experience,Where to apply,Location
+            return_text = "We found a match \n\n"
+            for index, row in data.iterrows():
+                return_text += f"{row['Title']} \n {row['Job description']} at {row['Location']}"  
+                if not row['Where to apply'] is np.nan:
+                    return_text += "\n\n Find more details and apply here {row['Where to apply']} \n\n\n"
+        return return_text
 
 class JobBot(ActivityHandler):
     # See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
