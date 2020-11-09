@@ -22,8 +22,14 @@ class IntentHandler:
         Output: {'product_categories': ["ssn", "kubernetes"]}
         """
         entities = self.recognizer_result.entities
-        entities.pop("$instance", {})
+        print (entities)
+
+        final_entities = {}
         for key, values in entities.items():
-            if isinstance(values, list) and isinstance(values[0], list):
-                entities[key] = [v for value in values for v in value]
-        return entities
+            print (key, values)
+            if isinstance(values, list):
+                if isinstance(values[0], list):
+                    final_entities[key] = [v for value in values for v in value]
+                else:
+                    final_entities[key] = values
+        return final_entities
