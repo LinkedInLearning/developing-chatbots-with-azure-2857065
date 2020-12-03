@@ -3,6 +3,8 @@
 # Licensed under the MIT License.
 
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class DefaultConfig:
     """ Bot Configuration """
@@ -10,3 +12,7 @@ class DefaultConfig:
     PORT = 3978
     APP_ID = os.environ.get("MicrosoftAppId", "")
     APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "")
+
+    QNA_KNOWLEDGEBASE_ID = os.environ.get("QnAKnowledgebaseId", "")
+    QNA_ENDPOINT_KEY = os.environ.get("QnAEndpointKey", "")
+    QNA_ENDPOINT_HOST = os.environ.get("QnAEndpointHostName", "")
