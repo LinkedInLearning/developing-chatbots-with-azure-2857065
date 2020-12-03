@@ -1,0 +1,52 @@
+Bot: Hi, I am Product bot of redtech30 and I can answer questions about our product offerings
+User: What is redtech30?
+Bot: <Company description>
+User: I am looking for some ML solutions for my finance startup?
+Bot: <List down ML offering>
+User: How much does it cost? 
+Bot: <lists down cost offerings>
+User: What are the features does it provide?
+Bot: <lists down features>
+User: Can I get a demo?
+Bot: I can put you in touch with someone for more info would you like that?
+User: Ofcourse
+Bot: <Get some info about the user>
+
+---
+Hi # greeting
+    - Hello
+    - hey
+    - You there?
+    - volia
+    - yo
+
+What is redtech30? # introduction
+    - redtech30? 
+    - tell me about redtech30? 
+
+I am looking for some ML solutions for my finance startup?  # product_list
+    - What products do you offer?
+    - What services do you offer?
+    - Do you have any ML services? $category
+    - Do you have any products for email marketing $category
+
+What are the features of Red30 CDN # feature list
+    - What features does your ML product have?
+    - What features does Red30 Learn provide?
+    - What are the features of Red30 Protect
+
+
+-- Static
+# greet
+# introduction
+# about the Company
+# company location
+
+
+-- Dynamic
+# get_price
+# schedule_demo
+# get_product $category
+# feature list $product:mandatory
+
+
