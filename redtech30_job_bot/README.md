@@ -1,6 +1,6 @@
-# redtech30_product_bot
+# redtech30_job_bot
 
-A chatbot that answers questions about products of redtech 30
+A chatbot that answers questions about job openings at redtech30
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and echoes it back.
 
