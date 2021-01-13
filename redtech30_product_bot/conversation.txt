@@ -13,38 +13,29 @@ User: Ofcourse
 Bot: <Get some info about the user>
 
 ---
-Hi # greeting
-    - Hello
-    - hey
-    - You there?
-    - volia
-    - yo
+# Greet
+Hi, Hello, hey, You there?, volia, yo
 
-What is redtech30? # introduction
-    - redtech30? 
-    - tell me about redtech30? 
+# end_conversation
+Bye, Good bye, see you, later
 
-I am looking for some ML solutions for my finance startup?  # product_list
-    - What products do you offer?
-    - What services do you offer?
-    - Do you have any ML services? $category
-    - Do you have any products for email marketing $category
+# company_info
+What is redtech30? 
+Tell me about redtech30
+redtech30 what is that? 
 
-What are the features of Red30 CDN # feature list
-    - What features does your ML product have?
-    - What features does Red30 Learn provide?
-    - What are the features of Red30 Protect
+# get_product_list (category)
 
+I am looking for some ML solutions for my finance startup?  
+I am looking for some ML products
+Do you have any ML solutions? $category
+I am looking for machine learning products
+I have an ML problem to solve
+I am looking for solutions to secure my product
 
--- Static
-# greet
-# introduction
+# get_features (product_name)
 
-
--- Dynamic
-# get_price
-# schedule_demo
-# get_product $category
-# feature list $product:mandatory
-
-
+What features does it provide?
+What features does Redtech30 Learn provide?
+What features does it have?
+What are the features does Red30 secure provide?
