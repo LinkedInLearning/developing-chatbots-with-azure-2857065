@@ -1,13 +1,14 @@
-Bot: Hi, I am Product bot of redtech30 and I can answer questions about our product offerings
+Bot: Hi, I am Product bot of redtech30 and I can answer questions about our product
 User: What is redtech30?
 Bot: <Company description>
-User: I am looking for some ML solutions for my finance startup?
-Bot: <List down ML offering>
-User: How much does it cost? 
-Bot: <lists down cost offerings>
-User: What are the features does it provide?
-Bot: <lists down features>
+User: Tell me more about your ML solutions
+Bot: <List down Ml products>
+User: What are the features does Ml learn provide?
+Bot: <lists down the features>
 User: Can I get a demo?
 Bot: I can put you in touch with someone for more info would you like that?
-User: Ofcourse
-Bot: <Get some info about the user>
+User: Yes sure
+Bot: <Get the user information>
+User: <gives the information>
+Bot: You will hear from us shortly with a scheduled demo
+User: Thank you.
