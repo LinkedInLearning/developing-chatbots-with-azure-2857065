@@ -29,7 +29,7 @@ To resolve this issue:
 
 _Back-End Engineer, Speaker, and Community Leader_
 
-Check out my instructor page on [LinkedIn Learning](https://www.linkedin.com/learning/instructors/ray-villalobos?u=104).
+Check out my instructor page on [LinkedIn Learning](https://www.linkedin.com/learning/instructors/bhavani-ravi).
 
 [lil-course-url]: https://www.linkedin.com/learning/developing-chatbots-with-azure
 [lil-thumbnail-url]: https://cdn.lynda.com/course/2857065/2857065-1611696629473-16x9.jpg
